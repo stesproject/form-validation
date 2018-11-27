@@ -1,53 +1,76 @@
 import React from "react";
-
-/* const Field = ({label, type}) => {
-	return (
-		<label>
-			{label}
-			<input type={type}/>
-		</label>
-	);
-}; */
+import PropTypes from 'prop-types';
 
 class Field extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			error: null
+			className: "",
+			errorMessage: "",
 		};
 		this.checkField = this.checkField.bind(this);
+		this.setFocus = this.setFocus.bind(this);
+		this.MANDATORY = '*';
 	}
 
 	render() {
-		let classES = this.state.error ? "inputWrong" : "inputOk";
+		const {label, required, message, pattern, type} = this.props;
+		const {className, errorMessage} = this.state;
+		let fieldLabel = required ? label.concat(this.MANDATORY) : label;
 		
 		return (
 			<label>
-				{this.props.label}
+				{fieldLabel}
 				<input
-					className={classES}
-					type={this.props.type}
-					pattern={this.props.pattern}
-					title={this.props.message}
+					className={className}
+					type={type}
+					pattern={pattern}
+					title={message}
+					required={required}
 					onBlur={this.checkField}
 					onFocus={this.setFocus}
-					required={this.props.required}
 				/>
+
+				<p className="error">{errorMessage}</p>
 			</label>
 		);
 	}
 
 	setFocus(event) {
-		/* event.target.style = `border-bottom-color: #3464bd;`; */
+		this.setState({className: "", errorMessage: ""});
 	}
 
 	checkField(event) {
-		/* console.log(`${event.target.value} - ${event.target.title}`); */
+		let isValid = event.target.checkValidity();
 
-		this.setState({error: !event.target.checkValidity()});
-		console.log(this.state);
-		console.log(event.target.validationMessage);
+		if (!isValid) {
+			this.setState({errorMessage: event.target.title, className: isValid ? "inputOk" : "inputWrong"});
+			console.log(event.target.validationMessage);
+		}
+		else {
+			this.setState({className: "inputOk"});
+		}
+
+		this.setValidity(event);
 	}
+
+	setValidity(event) {
+		const {checkValidity} = this.props;
+
+		checkValidity(event);
+	}
+}
+
+Field.defaultProps = {
+	required: false,
+	title: "",
+}
+
+Field.propTypes = {
+	required: PropTypes.bool,
+	title: PropTypes.string,
+	type: PropTypes.string.isRequired,
+	label: PropTypes.string.isRequired,
 }
 
 export default Field;

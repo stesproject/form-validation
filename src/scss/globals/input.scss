@@ -22,10 +22,15 @@ input {
 	}
 
 	&.inputWrong {
-		border-bottom-color: $color-inputWrong;
+		border-bottom: 1px solid $color-inputWrong;
 	}
 
 	&.inputOk {
-		border-bottom-color: $color-inputOk;
+		background-color: $color-inputOk;
 	}
+}
+
+.error {
+	font-size: 0.85em;
+	color: $color-inputWrong;
 }

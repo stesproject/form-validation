@@ -1,10 +1,5 @@
 import React from "react";
-import Axios from "axios";
 import Form from "Form";
-
-let buttonEnabled = true;
-
-function checkButton() {}
 
 class App extends React.Component {
 	constructor(props) {
@@ -18,10 +13,7 @@ class App extends React.Component {
 		return (
 			<React.Fragment>
 				<div className="react-form-container">
-					<form onSubmit={this.handleSubmit}>
-						<Form />
-						<input className="button" type="submit" value="Submit" disabled={buttonEnabled} />
-					</form>
+					<Form />
 				</div>
 			</React.Fragment>
 		);
