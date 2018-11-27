@@ -1,0 +1,76 @@
+@import "./variables/index.scss";
+@import "./mixins/index.scss";
+@import "./globals/index.scss";
+@import "./globals/input.scss";
+
+// Function
+@function remy($value, $base: 16px) {
+	@return ($value / $base) * 1rem;
+}
+
+html {
+	box-sizing: border-box;
+	font-size: 16px;
+}
+
+*,
+*:after,
+*:before {
+	box-sizing: border-box;
+}
+
+body {
+	font: 100% "Roboto", arial, sans-serif;
+	background: $color-grey-light;
+}
+
+form {
+	padding: remy(32px);
+	margin-top: 2rem;
+	margin-right: auto;
+	margin-left: auto;
+	max-width: remy(380px);
+	background-color: $form-bg-color;
+	border-radius: $radius;
+	box-shadow: $form-shadow;
+}
+
+label {
+	display: inline-block;
+	margin-bottom: 0.5rem;
+	font-size: 0.9rem;
+	/* text-transform: uppercase;
+	font-weight: bold; */
+}
+
+.button {
+	display: inline-block;
+	padding: 0.75rem 1rem;
+	margin-top: 1.618rem;
+	font-weight: 400;
+	text-align: center;
+	text-transform: uppercase;
+	color: #fff;
+	vertical-align: middle;
+	white-space: nowrap;
+	background-color: $color-primary;
+	border: 1px solid transparent;
+	box-shadow: 0 15px 35px rgba(50, 50, 93, 0.1), 0 5px 15px rgba(0, 0, 0, 0.07);
+	cursor: pointer;
+    user-select: none;
+    border-radius: 25px;
+
+	&:focus,
+	&:hover {
+		background-color: lighten($color-primary, 10%);
+	}
+
+	&:focus {
+		outline: 0;
+	}
+
+	&:disabled {
+		background-color: $button-disabled;
+		/* display: none; */
+	}
+}
